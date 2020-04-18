@@ -32,6 +32,14 @@ public class TestWeaponHipToAim : MonoBehaviour
 
     PlayerInput playerInput;
 
+    [SerializeField]
+    private Animator animator;
+
+    private void Start()
+    {
+        weapon.parent = hipFireState.targetTransform;
+    }
+
     void Update()
     {
         if(playerInput == null)
@@ -50,6 +58,8 @@ public class TestWeaponHipToAim : MonoBehaviour
             if(playerInput.sprint.WasPressed)
             {
                 transitionAmount = 0f;
+                animator.SetBool("Sprinting", true);
+                weapon.parent = sprintState.targetTransform;
             }
             currentAimState = sprintState;
         }
@@ -59,11 +69,14 @@ public class TestWeaponHipToAim : MonoBehaviour
             {
                 currentAimState = hipFireState;
                 transitionAmount = 0f;
+                animator.SetBool("Sprinting", false);
+                weapon.parent = hipFireState.targetTransform;
             }
             if (Input.GetButtonDown("Fire2"))
             {
                 currentAimState = aimSightsState;
                 transitionAmount = 0f;
+                weapon.parent = aimSightsState.targetTransform;
             }
         }
 
