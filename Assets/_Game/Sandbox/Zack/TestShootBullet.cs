@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestShootBullet : MonoBehaviour
 {
     [SerializeField]
-    private GameObject bulletPrefab;
+    private Bullet bulletPrefab;
 
     [SerializeField]
     private Transform shootPoint;
@@ -22,6 +22,15 @@ public class TestShootBullet : MonoBehaviour
     private float shootCooldown = 0f;
 
     PlayerInput playerInput;
+
+    [SerializeField]
+    LayerMask hitLayerMask;
+
+    [SerializeField]
+    private int damageAmountMin = 2;
+    
+    [SerializeField]
+    private int damageAmountMax = 5;
 
     void Update()
     {
@@ -56,8 +65,7 @@ public class TestShootBullet : MonoBehaviour
 
     void ShootBullet()
     {
-        GameObject bullet = GameObject.Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
-        Rigidbody bulletRB = bullet.GetComponent<Rigidbody>();
-        bulletRB.AddRelativeForce(Vector3.forward * shootSpeed, ForceMode.Impulse);
+        Bullet bullet = Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
+        bullet.Initialize(gameObject, Random.Range(damageAmountMin, damageAmountMax), hitLayerMask, Vector3.forward * shootSpeed);
     }
 }
