@@ -290,6 +290,8 @@ GameObject:
   - component: {fileID: 8139101272208940428}
   - component: {fileID: 1805722723}
   - component: {fileID: 8318186247282090232}
+  - component: {fileID: 1317523105}
+  - component: {fileID: 1317523104}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -454,7 +456,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: -3142112785168738166, guid: c8c5b5844020aad4da173df7e7e92ed0,
     type: 3}
   shootPoint: {fileID: 3642383451275883751}
-  shootSpeed: 400
+  shootSpeed: 100
   autoFire: 1
   roundsPerMinute: 600
   hitLayerMask:
@@ -462,13 +464,43 @@ MonoBehaviour:
     m_Bits: 0
   damageAmountMin: 2
   damageAmountMax: 5
-  bulletSpreadRadius: 10
+  bulletSpreadRadius: 4
   recoilHolder: {fileID: 8030667690825616338}
   uziRecoilSettings:
     recoilAmount: 2
     maxRecoil: 45
     recoilResetAmount: 135
   currentRecoilAmount: 0
+--- !u!136 &1317523105
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8139101272208940429}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.6
+  m_Height: 2.1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1317523104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8139101272208940429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bcbaaf2039f7684c9f1a0525743c8c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showDamageNumbers: 0
+  OnDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8797410481716673254
 GameObject:
   m_ObjectHideFlags: 0
