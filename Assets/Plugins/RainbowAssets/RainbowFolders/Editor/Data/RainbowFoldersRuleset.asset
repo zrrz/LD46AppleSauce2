@@ -389,7 +389,7 @@ MonoBehaviour:
     Key: Assets/_Game/Sandbox/Scott
     Ordinal: 31
     Priority: 0
-    IconType: 70
+    IconType: 190
     SmallIcon: {fileID: 0}
     LargeIcon: {fileID: 0}
     IsIconRecursive: 0
