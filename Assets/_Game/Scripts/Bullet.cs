@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
 
     public void Initialize(GameObject damageSource, float damageAmount, LayerMask hitLayerMask, Vector3 velocity)
     {
-        rigidbody.AddRelativeForce(velocity, ForceMode.Impulse);
+        rigidbody.AddForce(velocity, ForceMode.Impulse);
         
         this.damageSource = damageSource;
         this.damageAmount = damageAmount;
@@ -34,12 +34,15 @@ public class Bullet : MonoBehaviour
         var damageHandler = collision.gameObject.GetComponent<DamageHandler>();
         if (damageHandler != null)
         {
-            damageHandler.ApplyDamage(damageSource, damageAmount, collision.contacts[0].point, rigidbody.velocity.normalized);
+            var damageDirectionData = new DamageHandler.DamageDirectionData(collision.contacts[0].point, rigidbody.velocity.normalized, 0f);
+            damageHandler.ApplyDamage(damageSource, damageAmount, damageDirectionData);
             trail.transform.parent = null;
             //Destroy(trail, trail.time);
             Destroy(gameObject);
 
-            //TODO destory trail even when bullet script destroys
+            //TODO destroy trail even when bullet script destroys
+
+            rigidbody.useGravity = true;
         }
     }
 }

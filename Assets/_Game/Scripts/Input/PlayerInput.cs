@@ -42,6 +42,12 @@ public class PlayerInput : BaseInput
             case RewiredConsts.Action.Sprint:
                 sprint = new ButtonAction(data);
                 break;
+            case RewiredConsts.Action.Aim:
+                aim = new ButtonAction(data);
+                break;
+            case RewiredConsts.Action.Shoot:
+                shoot = new ButtonAction(data);
+                break;
             case RewiredConsts.Action.Interact:
                 interact = new ButtonAction(data);
                 break;

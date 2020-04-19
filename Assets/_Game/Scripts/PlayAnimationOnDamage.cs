@@ -25,7 +25,7 @@ public class PlayAnimationOnDamage : MonoBehaviour
         }
     }
 
-    void PlayAnimation(GameObject damageSource, float damageAmount, Vector3 hitPoint, Vector3 damageDirection)
+    void PlayAnimation(GameObject damageSource, float damageAmount, DamageHandler.DamageDirectionData damageDirectionData)
     {
         animator.SetTrigger(animationTriggerName);
     }
