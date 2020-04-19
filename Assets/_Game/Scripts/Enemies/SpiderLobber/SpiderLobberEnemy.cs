@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiderLobber : MonoBehaviour
+public class SpiderLobberEnemy : MonoBehaviour
 {
 
     [System.Serializable]

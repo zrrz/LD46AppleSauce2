@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestShootBullet : MonoBehaviour
+public class PlayerShootingHandler : MonoBehaviour
 {
     [SerializeField]
     private Bullet bulletPrefab;
@@ -65,7 +65,10 @@ public class TestShootBullet : MonoBehaviour
             playerInput = PlayerInput.Instance;
         }
 
-        HandleShooting();
+        if(!playerInput.sprint.IsPressed)
+        {
+            HandleShooting();
+        }
 
         HandleRecoil();
     }

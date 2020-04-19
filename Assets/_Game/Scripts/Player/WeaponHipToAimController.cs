@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestWeaponHipToAim : MonoBehaviour
+public class WeaponHipToAimController : MonoBehaviour
 {
     [System.Serializable]
     class WeaponAimState
@@ -47,12 +47,13 @@ public class TestWeaponHipToAim : MonoBehaviour
             playerInput = PlayerInput.Instance;
         }
 
-        if(currentAimState == null)
+        animator.SetFloat("MoveSpeed", playerInput.MoveDir.magnitude);
+
+        if (currentAimState == null)
         {
             currentAimState = hipFireState;
         }
 
-        //Sorry Jesus for this code I am about to write
         if(playerInput.sprint.IsPressed)
         {
             if(playerInput.sprint.WasPressed)
