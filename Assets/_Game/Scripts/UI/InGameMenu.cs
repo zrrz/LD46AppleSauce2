@@ -71,6 +71,12 @@ public class InGameMenu : MonoBehaviour
         qualitySettingsText.text = "Quality Settings: " + QualitySettings.names[QualitySettings.GetQualityLevel()];
     }
 
+    public void BTN_RestartLevel()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
+        GameManager.Instance.SetMenuState(false);
+    }
+
     public void BTN_QuitToMenu()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");

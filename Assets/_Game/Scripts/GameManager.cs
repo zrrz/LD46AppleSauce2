@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void SetMenuState(bool on)
+    public void SetMenuState(bool on)
     {
         if (on)
         {
