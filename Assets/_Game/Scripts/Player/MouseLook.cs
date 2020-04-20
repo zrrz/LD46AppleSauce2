@@ -17,7 +17,6 @@ public class MouseLook : MonoBehaviour
     void Start()
     {
         playerInput = PlayerInput.Instance;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()

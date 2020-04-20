@@ -35,3 +35,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 ProjectSettings/Packages/com.unity.probuilder/Settings.json
+ProjectSettings/Packages/com.unity.progrids/Settings.json

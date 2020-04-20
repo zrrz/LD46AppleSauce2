@@ -18,8 +18,59 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
+    [SerializeField]
+    private GameObject uiCanvas;
+
     private void Awake()
     {
         Instance = this;
+        SetMenuState(false);
     }
+
+    public void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetMenuState(!uiCanvas.gameObject.activeSelf);
+            //if(uiCanvas.gameObject.activeSelf)
+            //{
+            //    uiCanvas.gameObject.SetActive(false);
+            //    LockCursor();
+            //    Time.timeScale = 1f;
+            //}
+            //else
+            //{
+            //    uiCanvas.gameObject.SetActive(true);
+            //    UnlockCursor();
+            //    Time.timeScale = 0f;
+            //}
+        }
+    }
+
+    void SetMenuState(bool on)
+    {
+        if (on)
+        {
+            uiCanvas.gameObject.SetActive(true);
+            UnlockCursor();
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            uiCanvas.gameObject.SetActive(false);
+            LockCursor();
+            Time.timeScale = 1f;
+        }
+    }
+
 }
