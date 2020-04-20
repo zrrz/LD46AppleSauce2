@@ -50,7 +50,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = Mathf.Clamp(currentHealth - damageAmount, 0f, maxHealth);
         UpdateHealthBar();
-        if(currentHealth <= 0f)
+        if(currentHealth < 1f)
         {
             Die();
         }

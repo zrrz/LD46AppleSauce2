@@ -38,7 +38,7 @@ public class DamageHandler : MonoBehaviour
     {
         if(showDamageNumbers)
         {
-            FloatingDamageTextHandler.CreateFloatingText(FloatingDamageTextHandler.DamageType.Normal, damageAmount, damageDirectionData.hitPoint + Random.onUnitSphere * 0.25f);
+            FloatingDamageTextHandler.CreateFloatingText(FloatingDamageTextHandler.DamageType.Normal, damageAmount, damageDirectionData.hitPoint + Random.onUnitSphere * 0.45f);
         }
         OnDamageTaken.Invoke(damageSource, damageAmount, damageDirectionData);
     }
