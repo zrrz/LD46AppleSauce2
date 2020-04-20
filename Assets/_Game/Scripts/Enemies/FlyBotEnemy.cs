@@ -67,12 +67,14 @@ public class FlyBotEnemy : MonoBehaviour
 
     void Start()
     {
+        soundHandler = GetComponentInChildren<RobotSoundHandler>();
         //TODO dont use FindObjectOfType    
         target = FindObjectOfType<PlayerMovement>().transform;
 
         currentHealth = maxHealth;
         damageHandler.OnDamageTaken.AddListener(TakeDamage);
         robotMiscSoundsTimer = Random.Range(5f, 15f);
+
     }
 
     private void TakeDamage(GameObject damageSource, float damageAmount, DamageHandler.DamageDirectionData damageDirectionData)

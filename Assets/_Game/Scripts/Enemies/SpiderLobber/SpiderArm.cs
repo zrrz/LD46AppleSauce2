@@ -46,8 +46,11 @@ public class SpiderArm : MonoBehaviour
 
     public bool ReadyToAttack => timer >= 1f && currentTarget.targetType == TargetType.Reload;
 
+    private RobotSoundHandler soundHandler;
+
     void Start()
     {
+        soundHandler = GetComponentInChildren<RobotSoundHandler>();
         armThrowerTarget.position = transform.TransformPoint(reloadTargetData.position);
         currentTarget = reloadTargetData;
         startPosition = Vector3.zero;
@@ -106,6 +109,7 @@ public class SpiderArm : MonoBehaviour
     {
         GameObject projectile = GameObject.Instantiate(projectilePrefab, projectileInHand.transform.position, projectileInHand.transform.rotation);
         projectile.GetComponent<Rigidbody>().AddForce(transform.forward * 300f + transform.up * 100f);
+        soundHandler.PlaySound(SoundType.RobotAttack);
     }
 
     public void SetTargetThrow()

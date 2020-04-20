@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if(playerData.playerHealth == null)
+        if(playerData.playerHealth == null || playerData.soundHandler == null)
         {
             var playerHealth = FindObjectOfType<PlayerHealth>();
             if(playerHealth)

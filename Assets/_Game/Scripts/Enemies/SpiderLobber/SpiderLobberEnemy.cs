@@ -60,8 +60,15 @@ public class SpiderLobberEnemy : MonoBehaviour
     private float maxHealth = 50f;
     private float currentHealth;
 
+    private RobotSoundHandler soundHandler;
+
+    float robotMiscSoundsTimer = 0f;
+
     void Start()
     {
+        soundHandler = GetComponentInChildren<RobotSoundHandler>();
+        robotMiscSoundsTimer = Random.Range(5f, 15f);
+
         //TODO Fix this eventually to not use FindObjectOfType
         target = FindObjectOfType<PlayerMovement>().transform;
 
@@ -88,6 +95,7 @@ public class SpiderLobberEnemy : MonoBehaviour
     private void TakeDamage(GameObject damageSource, float damageAmount, DamageHandler.DamageDirectionData damageDirectionData)
     {
         currentHealth -= damageAmount;
+        soundHandler.PlaySound(SoundType.RobotHurt);
         if (currentHealth < 0f)
         {
             Die();
@@ -96,12 +104,21 @@ public class SpiderLobberEnemy : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        soundHandler.PlaySound(SoundType.RobotDeath);
+        //TODO particles and stuff
+        this.enabled = false;
+        Destroy(gameObject, 1f);
     }
-
 
     void Update()
     {
+        robotMiscSoundsTimer -= Time.deltaTime;
+        if (robotMiscSoundsTimer <= 0f)
+        {
+            robotMiscSoundsTimer = Random.Range(5f, 15f);
+            soundHandler.PlaySound(SoundType.RobotMiscSounds);
+        }
+
         Vector3 direction = (target.position - transform.position);
         direction.y = 0f;
         if (direction.sqrMagnitude > 1f)
@@ -166,5 +183,14 @@ public class SpiderLobberEnemy : MonoBehaviour
         Gizmos.DrawWireCube(transform.TransformPoint(backRightLeg.defaultPosition), Vector3.one * 0.15f);
         Gizmos.DrawWireCube(transform.TransformPoint(middleRightLeg.defaultPosition), Vector3.one * 0.15f);
         Gizmos.DrawWireCube(transform.TransformPoint(frontRightLeg.defaultPosition), Vector3.one * 0.15f);
+
+        Gizmos.color = Color.blue;
+
+        Gizmos.DrawWireCube(backLeftLeg.legTarget.position, Vector3.one * 0.15f);
+        Gizmos.DrawWireCube(middleLeftLeg.legTarget.position, Vector3.one * 0.15f);
+        Gizmos.DrawWireCube(frontLeftLeg.legTarget.position, Vector3.one * 0.15f);
+        Gizmos.DrawWireCube(backRightLeg.legTarget.position, Vector3.one * 0.15f);
+        Gizmos.DrawWireCube(middleRightLeg.legTarget.position, Vector3.one * 0.15f);
+        Gizmos.DrawWireCube(frontRightLeg.legTarget.position, Vector3.one * 0.15f);
     }
 }
