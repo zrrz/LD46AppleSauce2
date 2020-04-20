@@ -406,6 +406,10 @@ MonoBehaviour:
   sfxVolume: {fileID: 2780229198371313977}
   musicVolume: {fileID: 2780229199269710693}
   qualitySettingsText: {fileID: 2780229198108862759}
+  sfxGroup: {fileID: -6341876060816625557, guid: deb5cfe9ff04a8b42aa8c8e822b3c894,
+    type: 2}
+  musicGroup: {fileID: 1322123100495309724, guid: deb5cfe9ff04a8b42aa8c8e822b3c894,
+    type: 2}
 --- !u!1 &2780229197841215675
 GameObject:
   m_ObjectHideFlags: 0
