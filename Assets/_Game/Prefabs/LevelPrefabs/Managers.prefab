@@ -251,6 +251,18 @@ PrefabInstance:
       propertyPath: uiCanvas
       value: 
       objectReference: {fileID: 3948488582723965080}
+    - target: {fileID: 2242184718777064882, guid: 894b87ab4b1999b4b8c9ff44583891a0,
+        type: 3}
+      propertyPath: musicMixerGroup
+      value: 
+      objectReference: {fileID: 1322123100495309724, guid: deb5cfe9ff04a8b42aa8c8e822b3c894,
+        type: 2}
+    - target: {fileID: 2242184718777064882, guid: 894b87ab4b1999b4b8c9ff44583891a0,
+        type: 3}
+      propertyPath: sfxMixerGroup
+      value: 
+      objectReference: {fileID: -6341876060816625557, guid: deb5cfe9ff04a8b42aa8c8e822b3c894,
+        type: 2}
     - target: {fileID: 2888563222082962808, guid: 894b87ab4b1999b4b8c9ff44583891a0,
         type: 3}
       propertyPath: m_LocalPosition.x

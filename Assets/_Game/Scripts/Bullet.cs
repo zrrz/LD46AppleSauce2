@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour
 
     //TODO use layermask
 
+
     public void Initialize(GameObject damageSource, float damageAmount, LayerMask hitLayerMask, Vector3 velocity)
     {
         rigidbody.AddForce(velocity, ForceMode.Impulse);
@@ -36,6 +37,11 @@ public class Bullet : MonoBehaviour
         {
             var damageDirectionData = new DamageHandler.DamageDirectionData(collision.contacts[0].point, rigidbody.velocity.normalized, 0f);
             damageHandler.ApplyDamage(damageSource, damageAmount, damageDirectionData);
+            GetComponentInChildren<BulletSoundHandler>().PlaySound(SoundType.GunBulletImpactEnemy);
+        }
+        else
+        {
+            GetComponentInChildren<BulletSoundHandler>().PlaySound(SoundType.GunBulletImpactEnvironment);
         }
         trail.transform.parent = null;
         trail.gameObject.AddComponent<TimedDestroy>().Destroy(trail.time); //Sorry for this code

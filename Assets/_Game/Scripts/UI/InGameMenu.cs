@@ -17,6 +17,11 @@ public class InGameMenu : MonoBehaviour
     string sfxVolumePrefsKey = "sfxVolume";
     string musicVolumePrefsKey = "musicVolume";
 
+    [SerializeField]
+    private UnityEngine.Audio.AudioMixerGroup sfxGroup;
+    [SerializeField]
+    private UnityEngine.Audio.AudioMixerGroup musicGroup;
+
     void Start()
     {
         sfxVolume.value = GetPlayerPrefsFloat(sfxVolumePrefsKey, 0.7f);
@@ -39,14 +44,14 @@ public class InGameMenu : MonoBehaviour
 
     public void SFXSliderChanged(float value)
     {
-        //TODO change AudioMixer volume
+        sfxGroup.audioMixer.SetFloat("FXVolume", (value * 80f) - 80f);
         PlayerPrefs.SetFloat(sfxVolumePrefsKey, value);
         PlayerPrefs.Save();
     }
 
     public void MusicSliderChanged(float value)
     {
-        //TODO change AudioMixer volume
+        musicGroup.audioMixer.SetFloat("MusicVolume", (value * 80f) - 80f);
         PlayerPrefs.SetFloat(musicVolumePrefsKey, value);
         PlayerPrefs.Save();
     }

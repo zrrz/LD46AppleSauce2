@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4024490628070751145}
   - component: {fileID: 4024490628070751147}
   - component: {fileID: -3142112785168738166}
+  - component: {fileID: -9184673899619561311}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -78,6 +79,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 4024490628070751147}
   trail: {fileID: 2965189504538994091}
+--- !u!114 &-9184673899619561311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4024490628070751149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbb9edb3eba86841a533ba42eb3fcd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletImpactEnvironment:
+    soundType: 0
+    mixerGroupType: 0
+    audioClips: []
+    volume: 1
+    radius: 50
+    spatialBlend: 1
+    rolloffMode: 0
+  bulletImpactEnemy:
+    soundType: 0
+    mixerGroupType: 0
+    audioClips: []
+    volume: 1
+    radius: 50
+    spatialBlend: 1
+    rolloffMode: 0
 --- !u!1 &4024490628506812240
 GameObject:
   m_ObjectHideFlags: 0

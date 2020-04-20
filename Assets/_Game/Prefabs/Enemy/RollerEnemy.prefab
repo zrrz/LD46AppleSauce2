@@ -1,5 +1,80 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &412842263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 412842264}
+  - component: {fileID: 412842265}
+  m_Layer: 0
+  m_Name: RobotSoundHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &412842264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412842263}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6829472250022093574}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &412842265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412842263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c21ce8604e441474f949b79f16edf225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  robotAttack:
+    soundType: 8
+    mixerGroupType: 1
+    audioClips: []
+    volume: 1
+    radius: 50
+    spatialBlend: 1
+    rolloffMode: 0
+  robotHurt:
+    soundType: 9
+    mixerGroupType: 1
+    audioClips: []
+    volume: 1
+    radius: 50
+    spatialBlend: 1
+    rolloffMode: 0
+  robotDeath:
+    soundType: 10
+    mixerGroupType: 1
+    audioClips: []
+    volume: 1
+    radius: 50
+    spatialBlend: 1
+    rolloffMode: 0
+  robotMiscSounds:
+    soundType: 7
+    mixerGroupType: 1
+    audioClips: []
+    volume: 1
+    radius: 50
+    spatialBlend: 1
+    rolloffMode: 0
 --- !u!1 &6829472249318198082
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,6 +296,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6829472249992724608}
+  - {fileID: 412842264}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
