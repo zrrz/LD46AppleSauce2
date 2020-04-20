@@ -36,13 +36,9 @@ public class Bullet : MonoBehaviour
         {
             var damageDirectionData = new DamageHandler.DamageDirectionData(collision.contacts[0].point, rigidbody.velocity.normalized, 0f);
             damageHandler.ApplyDamage(damageSource, damageAmount, damageDirectionData);
-            trail.transform.parent = null;
-            //Destroy(trail, trail.time);
-            Destroy(gameObject);
-
-            //TODO destroy trail even when bullet script destroys
-
-            rigidbody.useGravity = true;
         }
+        trail.transform.parent = null;
+        trail.gameObject.AddComponent<TimedDestroy>().Destroy(trail.time); //Sorry for this code
+        Destroy(gameObject);
     }
 }
