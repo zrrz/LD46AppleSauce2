@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
         SpiderLobber
     }
 
+    [System.Serializable]
     private class EnemySpawnData
     {
         public EnemyType enemyType;

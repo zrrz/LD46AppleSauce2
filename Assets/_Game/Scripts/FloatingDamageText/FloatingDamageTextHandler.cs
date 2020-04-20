@@ -40,7 +40,8 @@ public class FloatingDamageTextHandler : MonoBehaviour
 
     public static void CreateFloatingText(DamageType damageType, float damageAmount, Vector3 position)
     {
-        if(instance == null)
+        damageAmount *= 12f;
+        if (instance == null)
         {
             Debug.LogError($"No instance of {nameof(FloatingDamageTextHandler)} in scene");
             return;
