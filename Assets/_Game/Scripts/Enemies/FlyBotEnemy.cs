@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,6 +41,16 @@ public class FlyBotEnemy : MonoBehaviour
     [SerializeField]
     private float velocityCollisionSpeed = 4f;
 
+    [SerializeField]
+    private float damageAmount = 12f;
+
+    [SerializeField]
+    private float maxHealth = 25f;
+    private float currentHealth;
+
+    [SerializeField]
+    private DamageHandler damageHandler;
+
     enum State
     {
         Recover,
@@ -55,12 +66,27 @@ public class FlyBotEnemy : MonoBehaviour
     {
         //TODO dont use FindObjectOfType    
         target = FindObjectOfType<PlayerMovement>().transform;
+
+        currentHealth = maxHealth;
+        damageHandler.OnDamageTaken.AddListener(TakeDamage);
+    }
+
+    private void TakeDamage(GameObject damageSource, float damageAmount, DamageHandler.DamageDirectionData damageDirectionData)
+    {
+        currentHealth -= damageAmount;
+        if (currentHealth < 0f)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 
     void Update()
     {
-        
-
         bladesVis.Rotate(0f, 0f, currentSpinSpeed * Time.deltaTime, Space.Self);
 
         //TEMP
@@ -178,9 +204,10 @@ public class FlyBotEnemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<PlayerHealth>())
+        var damageHandler = collision.gameObject.GetComponent<DamageHandler>();
+        if (damageHandler != null)
         {
-
+            damageHandler.ApplyDamage(gameObject, damageAmount, new DamageHandler.DamageDirectionData(collision.contacts[0].point, -collision.contacts[0].normal, 0f));
         }
         else
         {

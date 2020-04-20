@@ -14,10 +14,10 @@ public class RollerEnemy : MonoBehaviour
     Transform target;
 
     [SerializeField]
-    private float forceAmount = 100f;
+    private float forceAmount = 10f;
 
     [SerializeField]
-    private float velocityChangeSpeed = 50f;
+    private float velocityChangeSpeed = 20f;
 
     private Vector3 velocity = Vector3.zero;
 
@@ -25,20 +25,22 @@ public class RollerEnemy : MonoBehaviour
     private float damageAmount = 10f;
 
     [SerializeField]
-    private float health = 100f;
+    private float maxHealth = 30f;
+    private float currentHealth;
 
     void Start()
     {
         //TODO Fix this eventually to not use FindObjectOfType
         target = FindObjectOfType<PlayerMovement>().transform;
 
+        currentHealth = maxHealth;
         damageHandler.OnDamageTaken.AddListener(TakeDamage);
     }
 
     private void TakeDamage(GameObject damageSource, float damageAmount, DamageHandler.DamageDirectionData damageDirectionData)
     {
-        health -= damageAmount;
-        if(health < 0f)
+        currentHealth -= damageAmount;
+        if(currentHealth < 0f)
         {
             Die();
         }
@@ -76,7 +78,7 @@ public class RollerEnemy : MonoBehaviour
                 DamageHandler damageHandler = target.GetComponent<DamageHandler>();
                 if(damageHandler != null)
                 {
-                    float velocityDamage = Mathf.Clamp(damageAmount * velocityStrength, damageAmount, damageAmount * 10f);
+                    float velocityDamage = Mathf.Clamp(damageAmount * velocityStrength/2f, damageAmount, damageAmount * 5f);
                     Vector3 direction = (target.position - transform.position).normalized;
                     var damageDirectionData = new DamageHandler.DamageDirectionData(Vector3.zero, direction, velocityStrength);
                     damageHandler.ApplyDamage(gameObject, velocityDamage, damageDirectionData);

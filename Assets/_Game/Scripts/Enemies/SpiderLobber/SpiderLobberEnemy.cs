@@ -53,6 +53,13 @@ public class SpiderLobberEnemy : MonoBehaviour
     [SerializeField]
     private SpiderArm spiderArm;
 
+    [SerializeField]
+    private DamageHandler damageHandler;
+
+    [SerializeField]
+    private float maxHealth = 50f;
+    private float currentHealth;
+
     void Start()
     {
         //TODO Fix this eventually to not use FindObjectOfType
@@ -73,7 +80,25 @@ public class SpiderLobberEnemy : MonoBehaviour
         }
 
         legs[0].legTarget.parent.parent = null;
+
+        currentHealth = maxHealth;
+        damageHandler.OnDamageTaken.AddListener(TakeDamage);
     }
+
+    private void TakeDamage(GameObject damageSource, float damageAmount, DamageHandler.DamageDirectionData damageDirectionData)
+    {
+        currentHealth -= damageAmount;
+        if (currentHealth < 0f)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
+
 
     void Update()
     {
