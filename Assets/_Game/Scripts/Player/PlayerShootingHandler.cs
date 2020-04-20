@@ -53,8 +53,11 @@ public class PlayerShootingHandler : MonoBehaviour
     [SerializeField]
     private float currentRecoilAmount = 0f;
 
+    private GunSoundHandler gunSoundHandler;
+
     private void Start()
     {
+        gunSoundHandler = GetComponentInChildren<GunSoundHandler>();
         currentRecoilSettings = uziRecoilSettings;
     }
 
@@ -129,6 +132,8 @@ public class PlayerShootingHandler : MonoBehaviour
             + shootPoint.right * Random.Range(-bulletSpreadRadius, bulletSpreadRadius) 
             + shootPoint.up * Random.Range(-bulletSpreadRadius, bulletSpreadRadius);
         bullet.Initialize(gameObject, Random.Range(damageAmountMin, damageAmountMax), hitLayerMask, bulletVelocity);
+
+        gunSoundHandler.PlaySound(SoundType.GunShoot);
 
         AddRecoil();
     }

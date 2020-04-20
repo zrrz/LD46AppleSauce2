@@ -49,6 +49,7 @@ public class PlayerHealth : MonoBehaviour
     private void TakeDamage(GameObject damageSource, float damageAmount, DamageHandler.DamageDirectionData damageDirectionData)
     {
         currentHealth = Mathf.Clamp(currentHealth - damageAmount, 0f, maxHealth);
+        GameManager.Instance.playerData.soundHandler.PlaySound(SoundType.PlayerHurt);
         UpdateHealthBar();
         if(currentHealth < 1f)
         {
@@ -90,7 +91,13 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
+        GameManager.Instance.playerData.soundHandler.PlaySound(SoundType.PlayerDeath);
         //TODO pretty all this flow up
+        Invoke("ResetLevel", 1.5f);
+    }
+
+    private void ResetLevel()
+    {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
     }
 }

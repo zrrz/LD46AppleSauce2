@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
         public PlayerInventory playerInventory;
         public PlayerShootingHandler shootingHandler;
         public PlayerInput playerInput;
+        public PlayerSoundHandler soundHandler;
     }
 
     public PlayerData playerData;
@@ -21,10 +22,35 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject uiCanvas;
 
+    [SerializeField]
+    private UnityEngine.Audio.AudioMixerGroup musicMixerGroup;
+    public static UnityEngine.Audio.AudioMixerGroup MusicMixerGroup => Instance.musicMixerGroup;
+
+    [SerializeField]
+    private UnityEngine.Audio.AudioMixerGroup sfxMixerGroup;
+    public static UnityEngine.Audio.AudioMixerGroup SfxMixerGroup => Instance.sfxMixerGroup;
+
     private void Awake()
     {
         Instance = this;
         SetMenuState(false);
+    }
+
+    private void Start()
+    {
+        if(playerData.playerHealth == null)
+        {
+            var playerHealth = FindObjectOfType<PlayerHealth>();
+            if(playerHealth)
+            {
+                playerData.playerHealth = playerHealth;
+                playerData.playerMovement = playerHealth.GetComponentInChildren<PlayerMovement>();
+                playerData.playerInventory = playerHealth.GetComponentInChildren<PlayerInventory>();
+                playerData.shootingHandler = playerHealth.GetComponentInChildren<PlayerShootingHandler>();
+                playerData.playerInput = playerHealth.GetComponentInChildren<PlayerInput>();
+                playerData.soundHandler = playerHealth.GetComponentInChildren<PlayerSoundHandler>();
+            }
+        }
     }
 
     public void LockCursor()

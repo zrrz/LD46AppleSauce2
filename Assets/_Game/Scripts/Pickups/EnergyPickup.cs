@@ -19,6 +19,7 @@ public class EnergyPickup : PickupBase
 
     public override void PickupItem(PlayerInventory playerInventory)
     {
+        GameManager.Instance.playerData.soundHandler.PlaySound(SoundType.PlayerGrabPickup);
         playerInventory.AddItem(PlayerInventory.ItemType.Energy);
         //TODO Particle? Sound?
         base.PickupItem(playerInventory);

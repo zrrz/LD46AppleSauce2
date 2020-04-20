@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,19 +27,27 @@ public class RollerEnemy : MonoBehaviour
     private float maxHealth = 30f;
     private float currentHealth;
 
+    private RobotSoundHandler soundHandler;
+
+    float robotMiscSoundsTimer = 0f;
+
     void Start()
     {
+        soundHandler = GetComponentInChildren<RobotSoundHandler>();
         //TODO Fix this eventually to not use FindObjectOfType
         target = FindObjectOfType<PlayerMovement>().transform;
 
         currentHealth = maxHealth;
         damageHandler.OnDamageTaken.AddListener(TakeDamage);
+
+        robotMiscSoundsTimer = Random.Range(5f, 15f);
     }
 
     private void TakeDamage(GameObject damageSource, float damageAmount, DamageHandler.DamageDirectionData damageDirectionData)
     {
         currentHealth -= damageAmount;
-        if(currentHealth < 0f)
+        soundHandler.PlaySound(SoundType.RobotHurt);
+        if (currentHealth < 0f)
         {
             Die();
         }
@@ -48,12 +55,21 @@ public class RollerEnemy : MonoBehaviour
 
     public void Die()
     {
+        soundHandler.PlaySound(SoundType.RobotDeath);
         //TODO particles and stuff
-        Destroy(gameObject);
+        this.enabled = false;
+        Destroy(gameObject, 1f);
     }
 
     void Update()
     {
+        robotMiscSoundsTimer -= Time.deltaTime;
+        if(robotMiscSoundsTimer <= 0f)
+        {
+            robotMiscSoundsTimer = Random.Range(5f, 15f);
+            soundHandler.PlaySound(SoundType.RobotMiscSounds);
+        }
+
         Vector3 direction = (target.position - transform.position);
         if(direction.sqrMagnitude > 1f)
         {
@@ -82,7 +98,7 @@ public class RollerEnemy : MonoBehaviour
                     Vector3 direction = (target.position - transform.position).normalized;
                     var damageDirectionData = new DamageHandler.DamageDirectionData(Vector3.zero, direction, velocityStrength);
                     damageHandler.ApplyDamage(gameObject, velocityDamage, damageDirectionData);
-                    print("Hit: " + target.name);
+                    soundHandler.PlaySound(SoundType.RobotAttack);
                 }
             }
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,6 +61,10 @@ public class FlyBotEnemy : MonoBehaviour
 
     float fallTimer = 0f;
 
+    private RobotSoundHandler soundHandler;
+
+    float robotMiscSoundsTimer = 0f;
+
     void Start()
     {
         //TODO dont use FindObjectOfType    
@@ -69,11 +72,13 @@ public class FlyBotEnemy : MonoBehaviour
 
         currentHealth = maxHealth;
         damageHandler.OnDamageTaken.AddListener(TakeDamage);
+        robotMiscSoundsTimer = Random.Range(5f, 15f);
     }
 
     private void TakeDamage(GameObject damageSource, float damageAmount, DamageHandler.DamageDirectionData damageDirectionData)
     {
         currentHealth -= damageAmount;
+        soundHandler.PlaySound(SoundType.RobotHurt);
         if (currentHealth < 0f)
         {
             Die();
@@ -82,11 +87,22 @@ public class FlyBotEnemy : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        soundHandler.PlaySound(SoundType.RobotDeath);
+        Fall();
+        //TODO particles and stuff
+        this.enabled = false;
+        Destroy(gameObject, 1f);
     }
 
     void Update()
     {
+        robotMiscSoundsTimer -= Time.deltaTime;
+        if (robotMiscSoundsTimer <= 0f)
+        {
+            robotMiscSoundsTimer = Random.Range(5f, 15f);
+            soundHandler.PlaySound(SoundType.RobotMiscSounds);
+        }
+
         bladesVis.Rotate(0f, 0f, currentSpinSpeed * Time.deltaTime, Space.Self);
 
         //TEMP
@@ -208,6 +224,7 @@ public class FlyBotEnemy : MonoBehaviour
         if (damageHandler != null)
         {
             damageHandler.ApplyDamage(gameObject, damageAmount, new DamageHandler.DamageDirectionData(collision.contacts[0].point, -collision.contacts[0].normal, 0f));
+            soundHandler.PlaySound(SoundType.RobotAttack);
         }
         else
         {

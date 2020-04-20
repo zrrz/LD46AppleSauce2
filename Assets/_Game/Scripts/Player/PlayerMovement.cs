@@ -32,6 +32,17 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerInput playerInput;
 
+    [SerializeField]
+    private float footStepPlayDistance = 0.4f;
+    private float currentStepDistance = 0f;
+
+    private Vector3 lastPosition;
+
+    private void Start()
+    {
+        lastPosition = transform.position;
+    }
+
     void Update()
     {
         if (playerInput == null)
@@ -44,6 +55,18 @@ public class PlayerMovement : MonoBehaviour
         if(isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
+
+            currentStepDistance += (lastPosition - transform.position).magnitude;
+            lastPosition = transform.position;
+            if(currentStepDistance > footStepPlayDistance)
+            {
+                GameManager.Instance.playerData.soundHandler.PlaySound(SoundType.PlayerFootstep);
+                currentStepDistance = 0f;
+            }
+        }
+        else
+        {
+            currentStepDistance = footStepPlayDistance;
         }
 
         //TODO check if diagonal movement is faster
