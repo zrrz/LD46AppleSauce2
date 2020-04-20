@@ -1301,7 +1301,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2780229197697667084}
-        m_MethodName: BTN_RestartLevel
+        m_MethodName: BTN_NextQualitySettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
