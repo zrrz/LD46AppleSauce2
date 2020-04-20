@@ -270,6 +270,7 @@ MonoBehaviour:
   forceAmount: 10
   velocityChangeSpeed: 20
   damageAmount: 10
+  health: 100
 --- !u!54 &6829472250022093578
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,10 +24,30 @@ public class RollerEnemy : MonoBehaviour
     [SerializeField]
     private float damageAmount = 10f;
 
+    [SerializeField]
+    private float health = 100f;
+
     void Start()
     {
         //TODO Fix this eventually to not use FindObjectOfType
         target = FindObjectOfType<PlayerMovement>().transform;
+
+        damageHandler.OnDamageTaken.AddListener(TakeDamage);
+    }
+
+    private void TakeDamage(GameObject damageSource, float damageAmount, DamageHandler.DamageDirectionData damageDirectionData)
+    {
+        health -= damageAmount;
+        if(health < 0f)
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        //TODO particles and stuff
+        Destroy(gameObject);
     }
 
     void Update()
