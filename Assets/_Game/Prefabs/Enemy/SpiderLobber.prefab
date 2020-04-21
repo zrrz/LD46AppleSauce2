@@ -4591,7 +4591,8 @@ MonoBehaviour:
   robotAttack:
     soundType: 8
     mixerGroupType: 1
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: daadd9dcba280994fb89a2f20bcae2f2, type: 3}
     volume: 1
     radius: 50
     spatialBlend: 1
@@ -4599,7 +4600,8 @@ MonoBehaviour:
   robotHurt:
     soundType: 9
     mixerGroupType: 1
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: 21e7600143d59244da78176e5a0201a9, type: 3}
     volume: 1
     radius: 50
     spatialBlend: 1
@@ -4607,7 +4609,8 @@ MonoBehaviour:
   robotDeath:
     soundType: 10
     mixerGroupType: 1
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: 8f474e468b94cdb4980b8c7d674a664d, type: 3}
     volume: 1
     radius: 50
     spatialBlend: 1
@@ -4615,7 +4618,10 @@ MonoBehaviour:
   robotMiscSounds:
     soundType: 7
     mixerGroupType: 1
-    audioClips: []
+    audioClips:
+    - {fileID: 8300000, guid: 4dfc9fae74d573a49a331beae1a9b949, type: 3}
+    - {fileID: 8300000, guid: 169db8eef65cfa445b8bcdd3704b9e90, type: 3}
+    - {fileID: 8300000, guid: c126945d4c245754f9067d1f775c00e5, type: 3}
     volume: 1
     radius: 50
     spatialBlend: 1

@@ -50,6 +50,7 @@ public class SoundSettings
         {
             var audioClip = audioClips[Random.Range(0, audioClips.Length)];
             audioSource.clip = audioClip;
+            audioSource.Play();
         }
         else
         {
