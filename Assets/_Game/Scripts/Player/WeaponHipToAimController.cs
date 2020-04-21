@@ -54,9 +54,10 @@ public class WeaponHipToAimController : MonoBehaviour
             currentAimState = hipFireState;
         }
 
-        if(playerInput.sprint.IsPressed)
+        if(playerInput.sprint.IsPressed && GameManager.Instance.playerData.playerMovement.isGrounded)
         {
-            if(playerInput.sprint.WasPressed)
+            animator.SetBool("Sprinting", true);
+            if (playerInput.sprint.WasPressed)
             {
                 transitionAmount = 0f;
                 animator.SetBool("Sprinting", true);
@@ -66,6 +67,7 @@ public class WeaponHipToAimController : MonoBehaviour
         }
         else
         {
+            animator.SetBool("Sprinting", false);
             if (playerInput.sprint.Released || Input.GetButtonUp("Fire2"))
             {
                 currentAimState = hipFireState;

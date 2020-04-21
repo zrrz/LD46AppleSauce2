@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private LayerMask groundMask;
 
     private Vector3 velocity;
-    private bool isGrounded;
+    public bool isGrounded;
 
     PlayerInput playerInput;
 
