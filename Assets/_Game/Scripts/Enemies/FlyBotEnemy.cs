@@ -93,6 +93,7 @@ public class FlyBotEnemy : MonoBehaviour
         Fall();
         //TODO particles and stuff
         this.enabled = false;
+        PickupManager.SpawnPickup(PickupManager.PickupType.Energy, transform.position, transform.rotation);
         Destroy(gameObject, 1f);
     }
 
