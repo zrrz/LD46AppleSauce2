@@ -37,11 +37,24 @@ public class Bullet : MonoBehaviour
         {
             var damageDirectionData = new DamageHandler.DamageDirectionData(collision.contacts[0].point, rigidbody.velocity.normalized, 0f);
             damageHandler.ApplyDamage(damageSource, damageAmount, damageDirectionData);
-            GetComponentInChildren<BulletSoundHandler>().PlaySound(SoundType.GunBulletImpactEnemy);
+            var bulletSoundHandler = GetComponentInChildren<BulletSoundHandler>();
+            if (bulletSoundHandler)
+            {
+                bulletSoundHandler.transform.parent = null;
+                bulletSoundHandler.gameObject.AddComponent<TimedDestroy>().Destroy(2f);
+                bulletSoundHandler.PlaySound(SoundType.GunBulletImpactEnemy);
+            }
         }
         else
         {
-            GetComponentInChildren<BulletSoundHandler>().PlaySound(SoundType.GunBulletImpactEnvironment);
+            var bulletSoundHandler = GetComponentInChildren<BulletSoundHandler>();
+            if(bulletSoundHandler)
+            {
+                bulletSoundHandler.transform.parent = null;
+                bulletSoundHandler.gameObject.AddComponent<TimedDestroy>().Destroy(2f);
+                bulletSoundHandler.PlaySound(SoundType.GunBulletImpactEnvironment);
+            }
+            
         }
         trail.transform.parent = null;
         trail.gameObject.AddComponent<TimedDestroy>().Destroy(trail.time); //Sorry for this code

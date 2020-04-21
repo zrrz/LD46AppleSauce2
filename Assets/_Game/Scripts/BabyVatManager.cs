@@ -52,6 +52,16 @@ public class BabyVatManager : MonoBehaviour
 
     private int energyLevel = 0;
 
+    private Animator animator;
+
+    [SerializeField]
+    private MeshRenderer liquidColorRenderer;
+
+    [SerializeField]
+    private Gradient liquidColorGradient;
+    [SerializeField]
+    private Gradient liquidColorGradientEmission;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -61,6 +71,12 @@ public class BabyVatManager : MonoBehaviour
         currentBabyTransformState = 0;
         babyRenderer.material.mainTexture = babyTransformStates[currentBabyTransformState].babyTexture;
         energyLevel = 0;
+        animator = GetComponentInChildren<Animator>();
+
+        animator.SetFloat("IdleSpeed", (1f));
+        babyRenderer.material.mainTexture = babyTransformStates[0].babyTexture;
+        liquidColorRenderer.material.color = liquidColorGradient.Evaluate(0f);
+        liquidColorRenderer.material.SetColor("_EmissionColor", liquidColorGradientEmission.Evaluate(0f));
     }
 
     void Update()
@@ -120,15 +136,36 @@ public class BabyVatManager : MonoBehaviour
 
     private void UpdateBabyTransformState()
     {
-        if(energyLevel > babyTransformStates[currentBabyTransformState+1].energyRequirement)
+        if(energyLevel >= babyTransformStates[currentBabyTransformState+1].energyRequirement)
         {
             currentBabyTransformState++;
+            animator.SetFloat("IdleSpeed", (currentBabyTransformState * 2f));
             babyRenderer.material.mainTexture = babyTransformStates[currentBabyTransformState].babyTexture;
-            if(currentBabyTransformState == babyTransformStates.Length-1)
+            float transformValue = (float)currentBabyTransformState / ((float)babyTransformStates.Length - 1f);
+            liquidColorRenderer.material.color = liquidColorGradient.Evaluate(transformValue);
+            liquidColorRenderer.material.SetColor("_EmissionColor", liquidColorGradientEmission.Evaluate(transformValue));
+            if (currentBabyTransformState == babyTransformStates.Length-1)
             {
-                //TODO end game somehow
+                babyRenderer.enabled = false;
+                GameManager.Instance.DisablePlayerInput();
+                GetComponentInChildren<AudioSource>().Play();
+                FindObjectOfType<MusicManager>().GetComponentInChildren<AudioSource>().Stop();
+                this.enabled = false;
+                
+                Invoke("StartFade", 3f);
             }
         }
+    }
+
+    void StartFade()
+    {
+        FindObjectOfType<FadeOutManager>().FadeOut(3f);
+        Invoke("EndGame", 3f);
+    }
+
+    void EndGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     private void StartEnergyDeposit()
@@ -139,6 +176,7 @@ public class BabyVatManager : MonoBehaviour
         depositVisualObject.SetActive(true);
         depositVisualObject.transform.position = depositStartPosition.position;
         depositVisualObject.transform.rotation = depositStartPosition.rotation;
+        depositVisualObject.GetComponentInChildren<MeshRenderer>().material.SetColor("_EmissionColor", Color.white * 0.7f);
         GameManager.Instance.playerData.playerInventory.RemoveItem(PlayerInventory.ItemType.Energy);
     }
 

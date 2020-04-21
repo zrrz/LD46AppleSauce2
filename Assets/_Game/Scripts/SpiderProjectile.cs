@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class SpiderProjectile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private float damageAmount = 15f;
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        var damageHandler = collision.gameObject.GetComponent<DamageHandler>();
+        if (damageHandler != null)
+        {
+            damageHandler.ApplyDamage(gameObject, damageAmount, new DamageHandler.DamageDirectionData(collision.contacts[0].point, -collision.contacts[0].normal, 0f));
+            //soundHandler.PlaySound(SoundType.RobotAttack);
+        }
+        else
+        {
+            Destroy(gameObject, 1f);
+        }
     }
 }

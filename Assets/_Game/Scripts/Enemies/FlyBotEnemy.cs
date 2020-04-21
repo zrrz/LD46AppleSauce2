@@ -50,6 +50,8 @@ public class FlyBotEnemy : MonoBehaviour
     [SerializeField]
     private DamageHandler damageHandler;
 
+    public bool enemyActive = true;
+
     enum State
     {
         Recover,
@@ -65,7 +67,7 @@ public class FlyBotEnemy : MonoBehaviour
 
     float robotMiscSoundsTimer = 0f;
 
-    void Start()
+    void Awake()
     {
         soundHandler = GetComponentInChildren<RobotSoundHandler>();
         //TODO dont use FindObjectOfType    
@@ -79,6 +81,7 @@ public class FlyBotEnemy : MonoBehaviour
 
     private void TakeDamage(GameObject damageSource, float damageAmount, DamageHandler.DamageDirectionData damageDirectionData)
     {
+        enemyActive = true;
         currentHealth -= damageAmount;
         soundHandler.PlaySound(SoundType.RobotHurt);
         if (currentHealth < 0f)
@@ -110,16 +113,15 @@ public class FlyBotEnemy : MonoBehaviour
         robotMiscSoundsTimer -= Time.deltaTime;
         if (robotMiscSoundsTimer <= 0f)
         {
-            robotMiscSoundsTimer = Random.Range(5f, 15f);
+            robotMiscSoundsTimer = Random.Range(1f, 5f);
             soundHandler.PlaySound(SoundType.RobotMiscSounds);
         }
 
         bladesVis.Rotate(0f, 0f, currentSpinSpeed * Time.deltaTime, Space.Self);
 
-        //TEMP
-        if(Input.GetKeyDown(KeyCode.Q))
+        if (!enemyActive)
         {
-            Fall();
+            return;
         }
 
         switch (state)
@@ -231,6 +233,11 @@ public class FlyBotEnemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if(!enemyActive)
+        {
+            return;
+        }
+
         var damageHandler = collision.gameObject.GetComponent<DamageHandler>();
         if (damageHandler != null)
         {

@@ -91,7 +91,6 @@ GameObject:
   - component: {fileID: 4024490628070751145}
   - component: {fileID: 4024490628070751147}
   - component: {fileID: -3142112785168738166}
-  - component: {fileID: -9184673899619561311}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -113,6 +112,7 @@ Transform:
   - {fileID: 4024490628506812255}
   - {fileID: 8921536626388030449}
   - {fileID: 1516604260}
+  - {fileID: 2173978379863081885}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -159,41 +159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 4024490628070751147}
   trail: {fileID: 2965189504538994091}
---- !u!114 &-9184673899619561311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4024490628070751149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dbb9edb3eba86841a533ba42eb3fcd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletImpactEnvironment:
-    soundType: 5
-    mixerGroupType: 1
-    audioClips:
-    - {fileID: 8300000, guid: 205f47cc66674c046a042249ebf71471, type: 3}
-    volume: 1
-    radius: 50
-    spatialBlend: 1
-    rolloffMode: 0
-  bulletImpactEnemy:
-    soundType: 12
-    mixerGroupType: 1
-    audioClips:
-    - {fileID: 8300000, guid: 365d283d9a2c1e34c9de836734ad99fa, type: 3}
-    - {fileID: 8300000, guid: bad587389ec3c0642992c331edba4dfc, type: 3}
-    - {fileID: 8300000, guid: b2ca0b6c14601bc4a8d599945814e13a, type: 3}
-    - {fileID: 8300000, guid: a160fe1471f28354ca80df28548f7d64, type: 3}
-    - {fileID: 8300000, guid: 443a0bd7bf3656d47a2103e77fa7e8f2, type: 3}
-    - {fileID: 8300000, guid: 6f39b628b5a0d3e478c6e57b5e39834e, type: 3}
-    volume: 1
-    radius: 50
-    spatialBlend: 1
-    rolloffMode: 0
 --- !u!1 &4024490628506812240
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,8 +230,8 @@ TrailRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004164643238707557}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
@@ -275,7 +240,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -327,8 +292,8 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0}
-      key2: {r: 0, g: 0, b: 0, a: 0.24313726}
+      key1: {r: 1, g: 1, b: 1, a: 0.9735294}
+      key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -343,7 +308,7 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
+      atime1: 33539
       atime2: 65535
       atime3: 0
       atime4: 0
@@ -352,7 +317,7 @@ TrailRenderer:
       atime7: 0
       m_Mode: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
+      m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -362,6 +327,72 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!1 &9149856295725511093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2173978379863081885}
+  - component: {fileID: 5855375700861513769}
+  m_Layer: 0
+  m_Name: BulletSoundHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2173978379863081885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9149856295725511093}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4024490628070751144}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5855375700861513769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9149856295725511093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbb9edb3eba86841a533ba42eb3fcd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletImpactEnvironment:
+    soundType: 5
+    mixerGroupType: 1
+    audioClips:
+    - {fileID: 8300000, guid: 205f47cc66674c046a042249ebf71471, type: 3}
+    volume: 1
+    radius: 200
+    spatialBlend: 1
+    rolloffMode: 0
+  bulletImpactEnemy:
+    soundType: 12
+    mixerGroupType: 1
+    audioClips:
+    - {fileID: 8300000, guid: 365d283d9a2c1e34c9de836734ad99fa, type: 3}
+    - {fileID: 8300000, guid: bad587389ec3c0642992c331edba4dfc, type: 3}
+    - {fileID: 8300000, guid: b2ca0b6c14601bc4a8d599945814e13a, type: 3}
+    - {fileID: 8300000, guid: a160fe1471f28354ca80df28548f7d64, type: 3}
+    - {fileID: 8300000, guid: 443a0bd7bf3656d47a2103e77fa7e8f2, type: 3}
+    - {fileID: 8300000, guid: 6f39b628b5a0d3e478c6e57b5e39834e, type: 3}
+    volume: 1
+    radius: 200
+    spatialBlend: 1
+    rolloffMode: 0
 --- !u!1001 &4470712667209524608
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -140,4 +140,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void DisablePlayerInput()
+    {
+        playerData.playerInput.enabled = false;
+        playerData.playerMovement.enabled = false;
+        playerData.shootingHandler.enabled = false;
+        //playerData.playerMovement.GetComponentInChildren<MouseLook>().enabled = false;
+    }
+
 }

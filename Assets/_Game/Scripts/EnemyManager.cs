@@ -47,11 +47,12 @@ public class EnemyManager : MonoBehaviour
         spawnPoints.Add(enemySpawnPoint);
     }
 
-    public void SpawnEnemy(EnemyType enemyType, EnemySpawnPoint spawnPoint)
+    public GameObject SpawnEnemy(EnemyType enemyType, EnemySpawnPoint spawnPoint)
     {
         GameObject enemyPrefab = spawnDataMap[enemyType].enemyPrefab;
         var enemy = Instantiate(enemyPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
         spawnedEnemies.Add(enemy);
+        return enemy;
     }
 
     public void ClearEnemies()

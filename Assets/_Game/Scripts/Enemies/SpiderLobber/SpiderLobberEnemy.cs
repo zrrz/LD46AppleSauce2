@@ -64,6 +64,8 @@ public class SpiderLobberEnemy : MonoBehaviour
 
     float robotMiscSoundsTimer = 0f;
 
+    public bool enemyActive = true;
+
     void Start()
     {
         soundHandler = GetComponentInChildren<RobotSoundHandler>();
@@ -90,10 +92,13 @@ public class SpiderLobberEnemy : MonoBehaviour
 
         currentHealth = maxHealth;
         damageHandler.OnDamageTaken.AddListener(TakeDamage);
+
+        characterController.SimpleMove(Vector3.zero);
     }
 
     private void TakeDamage(GameObject damageSource, float damageAmount, DamageHandler.DamageDirectionData damageDirectionData)
     {
+        enemyActive = true;
         currentHealth -= damageAmount;
         soundHandler.PlaySound(SoundType.RobotHurt);
         if (currentHealth < 0f)
@@ -124,8 +129,13 @@ public class SpiderLobberEnemy : MonoBehaviour
         robotMiscSoundsTimer -= Time.deltaTime;
         if (robotMiscSoundsTimer <= 0f)
         {
-            robotMiscSoundsTimer = Random.Range(5f, 15f);
+            robotMiscSoundsTimer = Random.Range(1f, 5f);
             soundHandler.PlaySound(SoundType.RobotMiscSounds);
+        }
+
+        if (!enemyActive)
+        {
+            return;
         }
 
         Vector3 direction = (target.position - transform.position);

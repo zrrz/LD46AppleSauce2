@@ -31,7 +31,9 @@ public class RollerEnemy : MonoBehaviour
 
     float robotMiscSoundsTimer = 0f;
 
-    void Start()
+    public bool enemyActive = true;
+
+    void Awake()
     {
         soundHandler = GetComponentInChildren<RobotSoundHandler>();
         //TODO Fix this eventually to not use FindObjectOfType
@@ -45,6 +47,8 @@ public class RollerEnemy : MonoBehaviour
 
     private void TakeDamage(GameObject damageSource, float damageAmount, DamageHandler.DamageDirectionData damageDirectionData)
     {
+        enemyActive = true;
+
         currentHealth -= damageAmount;
         soundHandler.PlaySound(SoundType.RobotHurt);
         if (currentHealth < 0f)
@@ -54,7 +58,6 @@ public class RollerEnemy : MonoBehaviour
     }
 
     bool dying = false;
-
     private void Die()
     {
         if (dying == true)
@@ -74,8 +77,13 @@ public class RollerEnemy : MonoBehaviour
         robotMiscSoundsTimer -= Time.deltaTime;
         if(robotMiscSoundsTimer <= 0f)
         {
-            robotMiscSoundsTimer = Random.Range(5f, 15f);
+            robotMiscSoundsTimer = Random.Range(1f, 5f);
             soundHandler.PlaySound(SoundType.RobotMiscSounds);
+        }
+
+        if (!enemyActive)
+        {
+            return;
         }
 
         Vector3 direction = (target.position - transform.position);
@@ -93,6 +101,10 @@ public class RollerEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        if(!target)
+        {
+            return;
+        }
         if(collision.gameObject == target.gameObject)
         {
             float velocityStrength = rigidbody.velocity.sqrMagnitude;

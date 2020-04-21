@@ -16,7 +16,7 @@ public class RobotSoundHandler : SoundHandlerBase
     [SerializeField]
     private SoundSettings robotMiscSounds;
 
-    private void Start()
+    private void Awake()
     {
         robotAttack.Initialize(gameObject, soundSettingsMap);
         robotHurt.Initialize(gameObject, soundSettingsMap);

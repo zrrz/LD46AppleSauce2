@@ -44,14 +44,14 @@ public class MainMenuUI : MonoBehaviour
 
     public void SFXSliderChanged(float value)
     {
-        sfxGroup.audioMixer.SetFloat("FXVolume", (value * 80f) - 80f);
+        sfxGroup.audioMixer.SetFloat("FXVolume", (value * 40f) - 40f);
         PlayerPrefs.SetFloat(sfxVolumePrefsKey, value);
         PlayerPrefs.Save();
     }
 
     public void MusicSliderChanged(float value)
     {
-        musicGroup.audioMixer.SetFloat("MusicVolume", (value * 80f) - 80f);
+        musicGroup.audioMixer.SetFloat("MusicVolume", (value * 40f) - 40f);
         PlayerPrefs.SetFloat(musicVolumePrefsKey, value);
         PlayerPrefs.Save();
     }

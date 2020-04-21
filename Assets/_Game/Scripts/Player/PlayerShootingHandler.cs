@@ -38,6 +38,7 @@ public class PlayerShootingHandler : MonoBehaviour
     [System.Serializable]
     class RecoilSettings
     {
+        public AnimationCurve recoilCurve;
         public float recoilAmount = 5f;
         public float maxRecoil = 45f;
         public float recoilResetAmount = 20f;
@@ -51,7 +52,9 @@ public class PlayerShootingHandler : MonoBehaviour
     private RecoilSettings uziRecoilSettings = new RecoilSettings();
     private RecoilSettings currentRecoilSettings;
     [SerializeField]
-    private float currentRecoilAmount = 0f;
+    private float currentRecoilYAmount = 0f;
+    [SerializeField]
+    private float currentRecoilXAmount = 0f;
 
     private GunSoundHandler gunSoundHandler;
 
@@ -106,23 +109,35 @@ public class PlayerShootingHandler : MonoBehaviour
     {
         //TODO check diff against epsilon
         Vector3 rotation = recoilHolder.localEulerAngles;
-        if(currentRecoilAmount != 0f)
-        {
-            if(!playerInput.shoot.IsPressed)
+        float resetAmount = (playerInput.shoot.IsPressed) ? currentRecoilSettings.recoilAmount * 0.5f : currentRecoilSettings.recoilResetAmount;
+        //if (!playerInput.shoot.IsPressed)
+        //{
+            if (currentRecoilYAmount != 0f)
             {
-                currentRecoilAmount = Mathf.MoveTowardsAngle(currentRecoilAmount, 0f, currentRecoilSettings.recoilResetAmount * Time.deltaTime);
+            
+                currentRecoilYAmount = Mathf.MoveTowardsAngle(currentRecoilYAmount, 0f, resetAmount * Time.deltaTime);
             }
+            if (currentRecoilXAmount != 0f)
+            {
+                currentRecoilXAmount = Mathf.MoveTowardsAngle(currentRecoilXAmount, 0f, resetAmount * Time.deltaTime);
+            }
+        //}
 
-        }
-
-        rotation.x = currentRecoilAmount;
+        rotation.x = currentRecoilYAmount;
+        rotation.y = currentRecoilXAmount;
         recoilHolder.localRotation = Quaternion.Lerp(recoilHolder.localRotation, Quaternion.Euler(rotation), 25f * Time.deltaTime);
     }
 
     void AddRecoil()
     {
-        currentRecoilAmount -= currentRecoilSettings.recoilAmount * (playerInput.aim.IsPressed ? 0.3f : 1f);
-        //TODO max recoil
+        float maxRecoilPercentage = -currentRecoilYAmount / currentRecoilSettings.maxRecoil;
+
+        float recoil = currentRecoilSettings.recoilAmount * currentRecoilSettings.recoilCurve.Evaluate(maxRecoilPercentage);
+
+        currentRecoilYAmount -= recoil * (playerInput.aim.IsPressed ? 0.5f : 1f);
+        currentRecoilYAmount = Mathf.Clamp(currentRecoilYAmount, -currentRecoilSettings.maxRecoil, 0f);
+
+        currentRecoilXAmount += Random.Range(0, 2) == 0 ? -1f : 1f * recoil/2f * (playerInput.aim.IsPressed ? 0.5f : 1f);
     }
 
     private void ShootBullet()

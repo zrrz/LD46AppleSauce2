@@ -24,7 +24,6 @@ public class InGameMenu : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("setting sound");
         sfxVolume.value = GetPlayerPrefsFloat(sfxVolumePrefsKey, 0.7f);
         if (sfxVolume.value == 0)
         {
