@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    private enum EnemyType
+    public enum EnemyType
     {
         Roller,
         FlyBot,
@@ -47,7 +47,7 @@ public class EnemyManager : MonoBehaviour
         spawnPoints.Add(enemySpawnPoint);
     }
 
-    void SpawnEnemy(EnemyType enemyType, EnemySpawnPoint spawnPoint)
+    public void SpawnEnemy(EnemyType enemyType, EnemySpawnPoint spawnPoint)
     {
         GameObject enemyPrefab = spawnDataMap[enemyType].enemyPrefab;
         var enemy = Instantiate(enemyPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
