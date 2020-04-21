@@ -110,7 +110,7 @@ public class PlayerShootingHandler : MonoBehaviour
         {
             if(!playerInput.shoot.IsPressed)
             {
-                currentRecoilAmount = Mathf.MoveTowards(currentRecoilAmount, 0f, currentRecoilSettings.recoilResetAmount * Time.deltaTime);
+                currentRecoilAmount = Mathf.MoveTowardsAngle(currentRecoilAmount, 0f, currentRecoilSettings.recoilResetAmount * Time.deltaTime);
             }
 
         }

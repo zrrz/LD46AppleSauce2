@@ -349,8 +349,8 @@ MonoBehaviour:
   rigidbody: {fileID: 6829472250022093578}
   forceAmount: 10
   velocityChangeSpeed: 20
-  damageAmount: 10
-  maxHealth: 30
+  damageAmount: 12
+  maxHealth: 20
 --- !u!54 &6829472250022093578
 Rigidbody:
   m_ObjectHideFlags: 0

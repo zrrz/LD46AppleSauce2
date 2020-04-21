@@ -87,8 +87,16 @@ public class FlyBotEnemy : MonoBehaviour
         }
     }
 
+    bool dying = false;
+
     private void Die()
     {
+        if (dying == true)
+        {
+            return;
+        }
+        dying = true;
+
         soundHandler.PlaySound(SoundType.RobotDeath);
         Fall();
         //TODO particles and stuff

@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 1512068041370980295}
   - component: {fileID: 2051645777272037338}
   - component: {fileID: 1442481103814361307}
+  - component: {fileID: 6428295984505715713}
   m_Layer: 0
   m_Name: SpiderProjectile
   m_TagString: Untagged
@@ -94,6 +95,18 @@ CapsuleCollider:
   m_Height: 0.45
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6428295984505715713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8365243125239453062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 613cc2ef841c929418fe918c2c14cbf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &449023021364419086
 PrefabInstance:
   m_ObjectHideFlags: 0

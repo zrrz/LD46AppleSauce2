@@ -24,8 +24,25 @@ public class InGameMenu : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("setting sound");
         sfxVolume.value = GetPlayerPrefsFloat(sfxVolumePrefsKey, 0.7f);
+        if (sfxVolume.value == 0)
+        {
+            sfxGroup.audioMixer.SetFloat("FXVolume", -80f);
+        }
+        else
+        {
+            sfxGroup.audioMixer.SetFloat("FXVolume", (sfxVolume.value * 40f) - 40f);
+        }
         musicVolume.value = GetPlayerPrefsFloat(musicVolumePrefsKey, 0.7f);
+        if (musicVolume.value == 0)
+        {
+            musicGroup.audioMixer.SetFloat("MusicVolume", -80f);
+        }
+        else
+        {
+            musicGroup.audioMixer.SetFloat("MusicVolume", (musicVolume.value * 40f) - 40f);
+        }
     }
 
     float GetPlayerPrefsFloat(string key, float defaultValue)
@@ -44,14 +61,28 @@ public class InGameMenu : MonoBehaviour
 
     public void SFXSliderChanged(float value)
     {
-        sfxGroup.audioMixer.SetFloat("FXVolume", (value * 80f) - 80f);
+        if (value == 0)
+        {
+            sfxGroup.audioMixer.SetFloat("FXVolume", -80f);
+        }
+        else
+        {
+            sfxGroup.audioMixer.SetFloat("FXVolume", (value * 40f) - 40f);
+        }
         PlayerPrefs.SetFloat(sfxVolumePrefsKey, value);
         PlayerPrefs.Save();
     }
 
     public void MusicSliderChanged(float value)
     {
-        musicGroup.audioMixer.SetFloat("MusicVolume", (value * 80f) - 80f);
+        if(value == 0)
+        {
+            musicGroup.audioMixer.SetFloat("MusicVolume", -80f);
+        }
+        else
+        {
+            musicGroup.audioMixer.SetFloat("MusicVolume", (value * 40f) - 40f);
+        }
         PlayerPrefs.SetFloat(musicVolumePrefsKey, value);
         PlayerPrefs.Save();
     }

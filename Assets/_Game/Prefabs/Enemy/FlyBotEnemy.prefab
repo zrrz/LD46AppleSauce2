@@ -73,8 +73,8 @@ MonoBehaviour:
   rigidbody: {fileID: 4929439654229354167}
   bladesVis: {fileID: 209775256709340192}
   velocityCollisionSpeed: 4
-  damageAmount: 12
-  maxHealth: 25
+  damageAmount: 35
+  maxHealth: 20
   damageHandler: {fileID: 240423540}
 --- !u!54 &4929439654229354167
 Rigidbody:

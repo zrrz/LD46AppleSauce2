@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
     private UnityEngine.Audio.AudioMixerGroup sfxMixerGroup;
     public static UnityEngine.Audio.AudioMixerGroup SfxMixerGroup => Instance.sfxMixerGroup;
 
+    string sfxVolumePrefsKey = "sfxVolume";
+    string musicVolumePrefsKey = "musicVolume";
+
     private void Awake()
     {
         Instance = this;
@@ -38,6 +41,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        FixSoundHack();
+
         if(playerData.playerHealth == null || playerData.soundHandler == null)
         {
             var playerHealth = FindObjectOfType<PlayerHealth>();
@@ -47,9 +52,45 @@ public class GameManager : MonoBehaviour
                 playerData.playerMovement = playerHealth.GetComponentInChildren<PlayerMovement>();
                 playerData.playerInventory = playerHealth.GetComponentInChildren<PlayerInventory>();
                 playerData.shootingHandler = playerHealth.GetComponentInChildren<PlayerShootingHandler>();
-                playerData.playerInput = playerHealth.GetComponentInChildren<PlayerInput>();
+                //playerData.playerInput = playerHealth.GetComponentInChildren<PlayerInput>();
                 playerData.soundHandler = playerHealth.GetComponentInChildren<PlayerSoundHandler>();
             }
+        }
+    }
+
+    private void FixSoundHack()
+    {
+        float sfxVolume = GetPlayerPrefsFloat(sfxVolumePrefsKey, 0.7f);
+        if (sfxVolume == 0)
+        {
+            SfxMixerGroup.audioMixer.SetFloat("FXVolume", -80f);
+        }
+        else
+        {
+            SfxMixerGroup.audioMixer.SetFloat("FXVolume", (sfxVolume * 40f) - 40f);
+        }
+        float musicVolume = GetPlayerPrefsFloat(musicVolumePrefsKey, 0.7f);
+        if (musicVolume == 0)
+        {
+            MusicMixerGroup.audioMixer.SetFloat("MusicVolume", -80f);
+        }
+        else
+        {
+            MusicMixerGroup.audioMixer.SetFloat("MusicVolume", (musicVolume * 40f) - 40f);
+        }
+    }
+
+    float GetPlayerPrefsFloat(string key, float defaultValue)
+    {
+        if (PlayerPrefs.HasKey(key))
+        {
+            return PlayerPrefs.GetFloat(key);
+        }
+        else
+        {
+            PlayerPrefs.SetFloat(key, defaultValue);
+            PlayerPrefs.Save();
+            return defaultValue;
         }
     }
 

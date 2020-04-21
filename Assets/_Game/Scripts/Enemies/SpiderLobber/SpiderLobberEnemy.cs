@@ -102,8 +102,16 @@ public class SpiderLobberEnemy : MonoBehaviour
         }
     }
 
+    bool dying = false;
+
     private void Die()
     {
+        if (dying == true)
+        {
+            return;
+        }
+        dying = true;
+
         soundHandler.PlaySound(SoundType.RobotDeath);
         //TODO particles and stuff
         this.enabled = false;
