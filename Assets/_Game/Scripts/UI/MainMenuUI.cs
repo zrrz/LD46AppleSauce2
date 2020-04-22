@@ -26,6 +26,7 @@ public class MainMenuUI : MonoBehaviour
     {
         sfxVolume.value = GetPlayerPrefsFloat(sfxVolumePrefsKey, 0.7f);
         musicVolume.value = GetPlayerPrefsFloat(musicVolumePrefsKey, 0.7f);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     float GetPlayerPrefsFloat(string key, float defaultValue)

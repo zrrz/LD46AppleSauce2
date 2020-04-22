@@ -60,16 +60,6 @@ public class SpiderArm : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            SetTargetThrow();
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            SetTargetReload();
-        }
-
         if (timer < 1f)
         {
             timer += Time.deltaTime / currentTarget.time;
@@ -114,7 +104,6 @@ public class SpiderArm : MonoBehaviour
 
     public void SetTargetThrow()
     {
-        print("SetTargetThrow");
         startPosition = transform.InverseTransformPoint(armThrowerTarget.position);
         currentTarget = throwTargetData;
         timer = 0f;
@@ -122,7 +111,6 @@ public class SpiderArm : MonoBehaviour
 
     public void SetTargetReload()
     {
-        print("SetTargetReload");
         startPosition = transform.InverseTransformPoint(armThrowerTarget.position);
         currentTarget = reloadTargetData;
         timer = 0f;

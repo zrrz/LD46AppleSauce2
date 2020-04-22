@@ -76,9 +76,9 @@ MonoBehaviour:
     audioClips:
     - {fileID: 8300000, guid: 39f040d0a861e964fb4387bda6dedd2d, type: 3}
     volume: 1
-    radius: 50
+    radius: 15
     spatialBlend: 1
-    rolloffMode: 0
+    rolloffMode: 1
 --- !u!1 &6829472249318198082
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +351,7 @@ MonoBehaviour:
   velocityChangeSpeed: 20
   damageAmount: 12
   maxHealth: 20
+  enemyActive: 1
 --- !u!54 &6829472250022093578
 Rigidbody:
   m_ObjectHideFlags: 0

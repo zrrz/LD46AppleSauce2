@@ -1148,7 +1148,7 @@ MonoBehaviour:
     m_Bits: 0
   damageAmountMin: 2
   damageAmountMax: 5
-  bulletSpreadRadius: 0.6
+  bulletSpreadRadius: 0.3
   recoilHolder: {fileID: 8030667690825616338}
   uziRecoilSettings:
     recoilCurve:
@@ -1417,21 +1417,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6186528583233075368, guid: c1a0da4518e9d6044b819d51fa8b9ab4,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6186528583233075368, guid: c1a0da4518e9d6044b819d51fa8b9ab4,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.403
-      objectReference: {fileID: 0}
-    - target: {fileID: 6186528583233075368, guid: c1a0da4518e9d6044b819d51fa8b9ab4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.347
       objectReference: {fileID: 0}
     - target: {fileID: 6286219671595773720, guid: c1a0da4518e9d6044b819d51fa8b9ab4,
         type: 3}

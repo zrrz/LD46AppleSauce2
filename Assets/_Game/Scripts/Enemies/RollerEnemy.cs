@@ -65,7 +65,9 @@ public class RollerEnemy : MonoBehaviour
             return;
         }
         dying = true;
+        soundHandler.transform.parent = null;
         soundHandler.PlaySound(SoundType.RobotDeath);
+        soundHandler.gameObject.AddComponent<TimedDestroy>().Destroy(2f);
         //TODO particles and stuff
         this.enabled = false;
         PickupManager.SpawnPickup(PickupManager.PickupType.Energy, transform.position, transform.rotation);

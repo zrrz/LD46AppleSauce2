@@ -3419,6 +3419,7 @@ MonoBehaviour:
   spiderArm: {fileID: 1740398287343326981}
   damageHandler: {fileID: 1740398287343326980}
   maxHealth: 40
+  enemyActive: 1
 --- !u!114 &1740398287343326981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4623,9 +4624,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 169db8eef65cfa445b8bcdd3704b9e90, type: 3}
     - {fileID: 8300000, guid: c126945d4c245754f9067d1f775c00e5, type: 3}
     volume: 1
-    radius: 50
+    radius: 15
     spatialBlend: 1
-    rolloffMode: 0
+    rolloffMode: 1
 --- !u!1 &5362860489823079765
 GameObject:
   m_ObjectHideFlags: 0

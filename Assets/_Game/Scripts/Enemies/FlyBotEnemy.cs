@@ -100,7 +100,9 @@ public class FlyBotEnemy : MonoBehaviour
         }
         dying = true;
 
+        soundHandler.transform.parent = null;
         soundHandler.PlaySound(SoundType.RobotDeath);
+        soundHandler.gameObject.AddComponent<TimedDestroy>().Destroy(2f);
         Fall();
         //TODO particles and stuff
         this.enabled = false;

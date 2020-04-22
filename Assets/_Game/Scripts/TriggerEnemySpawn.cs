@@ -28,6 +28,10 @@ public class TriggerEnemySpawn : MonoBehaviour
 
     private void SetEnemyState(bool on)
     {
+        if(enemy == null)
+        {
+            return;
+        }
         switch (enemyType)
         {
             case EnemyManager.EnemyType.Roller:
